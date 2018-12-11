@@ -1,6 +1,6 @@
 {
-  "name": "walnut-desktop",
-  "version": "1.0.0",
+  "name": "Walnut",
+  "version": "1.0.2",
   "main": "src/electron.js",
   "scripts": {
     "dev": "ELECTRON_ENV=development ./node_modules/.bin/electron .",
@@ -12,8 +12,8 @@
     "electron-window-state": "^5.0.3"
   },
   "devDependencies": {
-    "electron": "^2.0.9",
-    "electron-builder": "^20.28.4"
+    "electron": "^3.0.9",
+    "electron-builder": "^20.38.2"
   },
   "build": {
     "productName": "Walnut",
