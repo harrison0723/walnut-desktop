@@ -1,6 +1,14 @@
-const { app, shell, Menu, BrowserWindow } = require('electron')
+/* 
+    Steps to release a new version:
+    1. Add GitHub token from your command line with: `export GH_TOKEN=SOMETHING`
+    2. Change version number in package.json
+    3. Deploy with `yarn deploy`
+*/
+
+const { app, shell, dialog, Menu, BrowserWindow } = require('electron')
 const { autoUpdater } = require("electron-updater")
 const windowStateKeeper = require('electron-window-state')
+const isOnline = require('is-online')
 const isDev = process.env.ELECTRON_ENV === 'development'
 
 let mainWindow
@@ -132,7 +140,17 @@ function createWindow() {
     })
 }
 
-app.on('ready', () => {
+app.on('ready', async () => {
+    const online = await isOnline()
+
+    if (!online) return dialog.showMessageBox({
+        message: 'No internet connection', 
+        detail: 'Walnut currently does not work offline.'
+    }, () => {
+        app.quit()
+        return
+    })
+
     createWindow()
     autoUpdater.checkForUpdatesAndNotify()
 })
@@ -144,7 +162,8 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-    mainWindow.show()
+    if (!mainWindow) return
+    else mainWindow.show()
 })
 
 app.on('before-quit', () => {
