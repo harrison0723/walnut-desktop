@@ -18,6 +18,7 @@ function createWindow() {
         height: mainWindowState.height,
         minWidth: 860,
         minHeight: 600,
+        show: false,
         backgroundColor: '#fff5ee',
         title: 'Walnut',
         titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default'
@@ -114,6 +115,10 @@ function createWindow() {
     mainWindow.webContents.on('new-window', function (event, url) {
         event.preventDefault()
         shell.openExternal(url)
+    })
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
     })
 
     mainWindow.on('close', (event) => {
