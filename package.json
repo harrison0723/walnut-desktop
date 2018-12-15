@@ -1,6 +1,6 @@
 {
   "name": "Walnut",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "src/electron.js",
   "scripts": {
     "dev": "ELECTRON_ENV=development ./node_modules/.bin/electron .",
@@ -13,7 +13,7 @@
     "is-online": "^8.0.0"
   },
   "devDependencies": {
-    "electron": "^3.0.11",
+    "electron": "^3.0.12",
     "electron-builder": "^20.38.2"
   },
   "build": {
